@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4248460346268730842}
   - component: {fileID: 2340024419160910367}
+  - component: {fileID: 7189816478725985851}
   m_Layer: 0
   m_Name: AttachmentPoint
   m_TagString: Untagged
@@ -133,6 +134,26 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &7189816478725985851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63025936616072356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96aca8ed0fe103c49ad018caa28ed3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foot: {fileID: 7811465844169564924}
+  rayDistance: 2
+  distanceBeforeMove: 1
+  movementAnimationSpeed: 2
+  layerMaskToHit:
+    serializedVersion: 2
+    m_Bits: 1024
+  isMoving: 0
 --- !u!1 &7811465844169564924
 GameObject:
   m_ObjectHideFlags: 0

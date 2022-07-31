@@ -236,6 +236,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2607146844642751016}
     m_Modifications:
+    - target: {fileID: 1854067301574139215, guid: 952abe840652ac045b403967fc3201f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5827229529115469716, guid: 952abe840652ac045b403967fc3201f1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -284,6 +288,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feet_B
       objectReference: {fileID: 0}
+    - target: {fileID: 6619300826854709838, guid: 952abe840652ac045b403967fc3201f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 952abe840652ac045b403967fc3201f1, type: 3}
 --- !u!4 &7592631370752429354 stripped
@@ -298,6 +306,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2607146844642751016}
     m_Modifications:
+    - target: {fileID: 1854067301574139215, guid: 952abe840652ac045b403967fc3201f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 5827229529115469716, guid: 952abe840652ac045b403967fc3201f1, type: 3}
       propertyPath: m_RootOrder
       value: 1

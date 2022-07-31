@@ -26,4 +26,9 @@ public class UpdateLineRender : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        UpdateRender();
+    }
 }

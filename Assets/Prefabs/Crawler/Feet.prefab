@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5827229529115469716}
   - component: {fileID: 2279229399119188782}
+  - component: {fileID: 7245265666691843258}
   m_Layer: 0
   m_Name: Feet
   m_TagString: Untagged
@@ -56,6 +57,18 @@ MonoBehaviour:
   lineRenderers:
   - {fileID: 1706518604025932869}
   - {fileID: 6181268329587419972}
+--- !u!114 &7245265666691843258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319669938804704296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d055deca4dae2439fdf4e31985c148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4023872187245839962
 PrefabInstance:
   m_ObjectHideFlags: 0
