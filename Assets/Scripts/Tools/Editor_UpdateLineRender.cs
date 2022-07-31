@@ -6,6 +6,16 @@ using UnityEditor;
 [CustomEditor(typeof(UpdateLineRender))]
 public class Editor_UpdateLineRender : Editor
 {
+    [MenuItem("MyTools/Line Renderers/Update All Line Renderers")]
+    static void UpdateAllLineRenders()
+    {
+        var lineRenders = FindObjectsOfType<UpdateLineRender>();
+        foreach (var item in lineRenders)
+        {
+            item.UpdateRender();
+        }
+    }
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
