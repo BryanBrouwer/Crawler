@@ -147,12 +147,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foot: {fileID: 7811465844169564924}
-  rayDistance: 2
+  rayDistance: 10
   distanceBeforeMove: 1
   movementAnimationSpeed: 2
   layerMaskToHit:
     serializedVersion: 2
     m_Bits: 1024
+  debug: 0
+  nextFootPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
 --- !u!1 &7811465844169564924
 GameObject:

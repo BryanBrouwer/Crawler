@@ -10,7 +10,7 @@ public class ProceduralFootPlacement : MonoBehaviour
     private ProceduralFeetAnimation proceduralFeetAnimation;
     //settings
     [SerializeField]
-    [Range(0.1f, 2.0f)]
+    [Range(0.1f, 20.0f)]
     private float rayDistance = 1.0f;
     [SerializeField]
     [Range(0.1f, 10.0f)]
@@ -24,10 +24,15 @@ public class ProceduralFootPlacement : MonoBehaviour
     private bool debug = false;
 
     //system variables
+    private Quaternion oldFootRotation;
+    private Quaternion finalFootRotation;
     private Vector3 currentFootPosition;
-    private Vector3 nextFootPosition;
-    private Vector3 finalFootPosition;
     private float fraction = 0;
+
+    [HideInInspector]
+    public Vector3 nextFootPosition;
+    [HideInInspector]
+    public Vector3 finalFootPosition;
     [HideInInspector]
     public bool isMoving = false;
 
@@ -35,6 +40,8 @@ public class ProceduralFootPlacement : MonoBehaviour
     {
         proceduralFeetAnimation = GetComponentInParent<ProceduralFeetAnimation>();
         currentFootPosition = foot.transform.position;
+        nextFootPosition = foot.transform.position;
+        oldFootRotation = foot.transform.rotation;
     }
 
     // Update is called once per frame
@@ -58,6 +65,8 @@ public class ProceduralFootPlacement : MonoBehaviour
                 {
                     isMoving = true;
                     finalFootPosition = hit.point;
+                    //oldFootRotation = foot.transform.rotation;
+                    finalFootRotation = Quaternion.FromToRotation(transform.up, hit.normal) * oldFootRotation;
                 }
             }
             else
@@ -80,13 +89,23 @@ public class ProceduralFootPlacement : MonoBehaviour
             {
                 fraction = 0.0f;
                 isMoving = false;
+
+                //movement
                 foot.transform.position = finalFootPosition;
+                nextFootPosition = finalFootPosition;
                 //Update value before next frame to avoid moving foot when moving body
                 currentFootPosition = foot.transform.position;
+
+                //rotation
+                foot.transform.rotation = finalFootRotation;
+                return;
             }
+            //movement
             nextFootPosition = Vector3.Lerp(currentFootPosition, finalFootPosition, fraction);
             nextFootPosition += transform.up * Mathf.Sin(Mathf.PI * 2 * (fraction * 180) / 360);
             foot.transform.position = nextFootPosition;
+            //rotation
+            foot.transform.rotation = finalFootRotation;//Quaternion.Lerp(oldFootRotation, finalFootRotation, fraction);
         }
         else
         {
