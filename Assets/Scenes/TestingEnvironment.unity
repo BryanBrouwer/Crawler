@@ -654,6 +654,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2296064230031403507, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
+      propertyPath: angleBetweenRays
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2433685818937035321, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
       propertyPath: m_Positions.Array.data[0].x
       value: 0.74
@@ -1122,6 +1126,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5121159619956648763, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
+      propertyPath: angleBetweenRays
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5492196164693146602, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
       propertyPath: m_Positions.Array.data[0].x
       value: 0.74
@@ -1292,7 +1300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6120521636567683962, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
       propertyPath: angleBetweenRays
-      value: 14.6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6175460352890899580, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
       propertyPath: m_Positions.Array.data[0].x
@@ -1737,6 +1745,10 @@ PrefabInstance:
     - target: {fileID: 8252964286165769617, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
       propertyPath: m_Positions.Array.data[1].z
       value: -20.24412
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256153670847049331, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
+      propertyPath: angleBetweenRays
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8366049879412774026, guid: 71a34136d7cbfbe40b7b72764a66ab76, type: 3}
       propertyPath: m_LocalPosition.x
