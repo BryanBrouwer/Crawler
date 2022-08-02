@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private float movementSpeed;
+    private float movementSpeed = 2;
     [SerializeField]
-    private float rotationSpeed;
+    private float runMultiplier = 2;
+    [SerializeField]
+    private float rotationSpeed = 30;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +23,25 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-                transform.position += transform.forward * movementSpeed * Time.deltaTime;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    transform.position += transform.forward * movementSpeed * runMultiplier * Time.deltaTime;
+                }
+                else
+                {
+                    transform.position += transform.forward * movementSpeed * Time.deltaTime;
+                }
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                transform.position += -transform.forward * movementSpeed * Time.deltaTime;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    transform.position += -transform.forward * movementSpeed * runMultiplier * Time.deltaTime;
+                }
+                else
+                {
+                    transform.position += -transform.forward * movementSpeed * Time.deltaTime;
+                }
             }
         }
 
