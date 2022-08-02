@@ -263,8 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d055deca4dae2439fdf4e31985c148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftFoot: {fileID: 876228378502117781}
-  RightFoot: {fileID: 5642586447327116948}
+  LeftFoot: {fileID: 5642586447327116948}
+  RightFoot: {fileID: 876228378502117781}
 --- !u!1 &3267023178480274443
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 1004384405910225584}
   - component: {fileID: 5642586447327116948}
   m_Layer: 0
-  m_Name: AttachmentPoint_R
+  m_Name: AttachmentPoint_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 5734992317091743153}
   - component: {fileID: 876228378502117781}
   m_Layer: 0
-  m_Name: AttachmentPoint_L
+  m_Name: AttachmentPoint_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

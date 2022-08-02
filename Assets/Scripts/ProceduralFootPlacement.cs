@@ -35,12 +35,15 @@ public class ProceduralFootPlacement : MonoBehaviour
     public Vector3 FinalFootPosition;
     [HideInInspector]
     public bool IsMoving = false;
+    //[HideInInspector]
+    //public bool IsLeftFoot = false;
 
     void Awake()
     {
         proceduralFeetAnimation = GetComponentInParent<ProceduralFeetAnimation>();
         currentFootPosition = foot.transform.position;
         NextFootPosition = foot.transform.position;
+        FinalFootPosition = foot.transform.position;
         oldFootRotation = foot.transform.rotation;
     }
 
