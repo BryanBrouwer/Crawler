@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3213811484621066385}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CameraFollowPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7183857913537559208}
   - component: {fileID: 2131617095849584443}
   - component: {fileID: 7112961238385705720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 6718102110372549548}
   - component: {fileID: 3091432775438318012}
   - component: {fileID: 7876694405939662434}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,8 +899,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0.75, y: 1.715, z: 1.73}
-  - {x: 0.75, y: 0, z: 1.85}
+  - {x: 0.74, y: 1.715, z: 42.8}
+  - {x: 0.74, y: 0, z: 42.92}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -970,7 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foot: {fileID: 3767272298750377955}
   rayDistance: 10
-  angleBetweenRays: 10
+  angleBetweenRays: 20
   distanceBeforeMove: 1
   movementAnimationSpeed: 2
   layerMaskToHit:
@@ -1128,8 +1128,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0.75, y: 1.715, z: -1.73}
-  - {x: 0.75, y: 0, z: -1.61}
+  - {x: 0.74, y: 1.715, z: 39.34}
+  - {x: 0.74, y: 0, z: 39.46}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foot: {fileID: 2330403564790034733}
   rayDistance: 10
-  angleBetweenRays: 10
+  angleBetweenRays: 20
   distanceBeforeMove: 1
   movementAnimationSpeed: 2
   layerMaskToHit:
@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 6249334077562463589}
   - component: {fileID: 8683314299597592490}
   - component: {fileID: 7703444284294516854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1413,7 +1413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8293832564656483747}
   - component: {fileID: 4648219341256314603}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1449,8 +1449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914e4c43a5d50f742a037555dbfba0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightOffset: 0
-  rotationMultiplier: 2
+  heightOffset: 1
+  rotationMultiplier: 0.5
   excludeMovingFeet: 1
   lerpMultiplier: 2
 --- !u!1 &5180403618433585439
@@ -1596,7 +1596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4401848331552396592}
   - component: {fileID: 7849175218116363511}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FeetHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1814,8 +1814,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -0.75, y: 1.715, z: 1.73}
-  - {x: -0.75, y: 0, z: 1.73}
+  - {x: -0.76, y: 1.715, z: 42.8}
+  - {x: -0.76, y: 0, z: 42.8}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -1885,7 +1885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foot: {fileID: 3290566006066443176}
   rayDistance: 10
-  angleBetweenRays: 10
+  angleBetweenRays: 20
   distanceBeforeMove: 1
   movementAnimationSpeed: 2
   layerMaskToHit:
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 873360291223659305}
   - component: {fileID: 3013307468648988729}
   - component: {fileID: 7065261209339596200}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2008,7 +2008,7 @@ GameObject:
   - component: {fileID: 4886180721872405635}
   - component: {fileID: 6791445499359682301}
   - component: {fileID: 7355751689109204070}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Crawler_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2047,7 +2047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
-  runMultiplier: 2
+  runMultiplier: 3
   rotationSpeed: 20
 --- !u!114 &7355751689109204070
 MonoBehaviour:
@@ -2138,8 +2138,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -0.75, y: 1.715, z: -1.73}
-  - {x: -0.75, y: 0, z: -1.73}
+  - {x: -0.76, y: 1.715, z: 39.34}
+  - {x: -0.76, y: 0, z: 39.34}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foot: {fileID: 1068270268229553938}
   rayDistance: 10
-  angleBetweenRays: 10
+  angleBetweenRays: 20
   distanceBeforeMove: 1
   movementAnimationSpeed: 2
   layerMaskToHit:
