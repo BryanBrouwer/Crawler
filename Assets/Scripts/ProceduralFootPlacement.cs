@@ -38,7 +38,7 @@ public class ProceduralFootPlacement : MonoBehaviour
     //[HideInInspector]
     //public bool IsLeftFoot = false;
 
-    void Awake()
+    public void Awake()
     {
         proceduralFeetAnimation = GetComponentInParent<ProceduralFeetAnimation>();
         currentFootPosition = foot.transform.position;
@@ -48,7 +48,7 @@ public class ProceduralFootPlacement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //Raycast code
         #region Raycast Region
@@ -67,7 +67,7 @@ public class ProceduralFootPlacement : MonoBehaviour
                     IsMoving = true;
                     FinalFootPosition = hit.point;
                     Quaternion qadUp = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                    Quaternion qadForward = Quaternion.FromToRotation(Vector3.forward, (currentFootPosition - FinalFootPosition).normalized);
+                    Quaternion qadForward = Quaternion.FromToRotation(foot.transform.forward, (currentFootPosition - FinalFootPosition).normalized);
                     finalFootRotation = qadUp * qadForward;
 
                 }
@@ -114,5 +114,16 @@ public class ProceduralFootPlacement : MonoBehaviour
             foot.transform.position = currentFootPosition;
         }
         #endregion
+    }
+
+    public void SetMinimumDistance(float dis)
+    {
+        distanceBeforeMove = dis;
+    }
+
+    public void MoveToFinalPosition()
+    {
+        foot.transform.position = FinalFootPosition;
+        foot.transform.rotation = finalFootRotation;
     }
 }
