@@ -10,11 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private float runMultiplier = 2;
     [SerializeField]
     private float rotationSpeed = 30;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

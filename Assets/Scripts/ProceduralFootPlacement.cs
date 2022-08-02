@@ -20,8 +20,6 @@ public class ProceduralFootPlacement : MonoBehaviour
     private float movementAnimationSpeed = 1.0f;
     [SerializeField]
     private LayerMask layerMaskToHit;
-    [SerializeField]
-    private bool debug = false;
 
     //system variables
     private Quaternion oldFootRotation;
@@ -29,6 +27,8 @@ public class ProceduralFootPlacement : MonoBehaviour
     private Vector3 currentFootPosition;
     private float fraction = 0;
 
+    [HideInInspector]
+    public Transform RaySpawnPoint;
     [HideInInspector]
     public Vector3 NextFootPosition;
     [HideInInspector]
@@ -56,29 +56,25 @@ public class ProceduralFootPlacement : MonoBehaviour
         {
             RaycastHit hit;
             // Does the ray intersect any objects on layerMaskToHit
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, layerMaskToHit))
+            if (Physics.Raycast(RaySpawnPoint.position, RaySpawnPoint.TransformDirection(Vector3.down), out hit, rayDistance, layerMaskToHit))
             {
-                if (debug)
-                {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                    Debug.Log("Did Hit");
-                }
-
+#if UNITY_EDITOR
+                Debug.DrawRay(RaySpawnPoint.position, RaySpawnPoint.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                Debug.Log("Did Hit");
+#endif
                 if (Vector3.Distance(currentFootPosition, hit.point) >= distanceBeforeMove)
                 {
                     IsMoving = true;
                     FinalFootPosition = hit.point;
-                    //oldFootRotation = foot.transform.rotation;
-                    finalFootRotation = Quaternion.FromToRotation(transform.up, hit.normal) * oldFootRotation;
+                    finalFootRotation = Quaternion.FromToRotation(foot.transform.up, hit.normal);// * oldFootRotation;
                 }
             }
             else
             {
-                if (debug)
-                {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * rayDistance, Color.white);
-                    Debug.Log("Did not Hit");
-                }
+#if UNITY_EDITOR
+                Debug.DrawRay(RaySpawnPoint.position, RaySpawnPoint.TransformDirection(Vector3.down) * rayDistance, Color.white);
+                Debug.Log("Did not Hit");
+#endif
             }
         }
         #endregion
@@ -108,7 +104,7 @@ public class ProceduralFootPlacement : MonoBehaviour
             NextFootPosition += transform.up * Mathf.Sin(Mathf.PI * 2 * (fraction * 180) / 360);
             foot.transform.position = NextFootPosition;
             //rotation
-            foot.transform.rotation = finalFootRotation;//Quaternion.Lerp(oldFootRotation, finalFootRotation, fraction);
+            foot.transform.rotation = finalFootRotation;
         }
         else
         {

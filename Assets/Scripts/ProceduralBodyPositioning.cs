@@ -18,12 +18,10 @@ public class ProceduralBodyPositioning : MonoBehaviour
 
     //system variables
     private List<ProceduralFeetAnimation> proceduralFeet;
-    private ProceduralFootPlacement[] proceduralFootPlacements;
     private Transform controllerTransform;
 
     private void Awake()
     {
-        proceduralFootPlacements = transform.parent.GetComponentsInChildren<ProceduralFootPlacement>();
         proceduralFeet = transform.parent.GetComponentInChildren<ProceduralFeetHolder>().ProceduralFeet;
         controllerTransform = transform.root;
     }
@@ -31,64 +29,11 @@ public class ProceduralBodyPositioning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Height adjustment
-        float averageHeight = 0.0f;
-        if (excludeMovingFeet)
-        {
-            for (int i = 0; i < proceduralFootPlacements.Length; i++)
-            {
-                if (!proceduralFootPlacements[i].IsMoving)
-                {
-                    averageHeight += proceduralFootPlacements[i].NextFootPosition.y;
-                }
-                else
-                {
-                    averageHeight += proceduralFootPlacements[i].FinalFootPosition.y;
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < proceduralFootPlacements.Length; i++)
-            {
-                averageHeight += proceduralFootPlacements[i].NextFootPosition.y;
-            }
-        }
+        ////movement of body
+        transform.position = Vector3.Lerp(transform.position, (proceduralFeet[0].RightFoot.FinalFootPosition
+            + proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition) * 0.5f, lerpMultiplier * Time.deltaTime);
 
-        averageHeight = (averageHeight / proceduralFootPlacements.Length) + heightOffset;
-        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, averageHeight, transform.position.z), lerpMultiplier * Time.deltaTime);
-
-        //Rotation
-        /* attempt 1
-        //left right difference only upper front and final last
-        bool leftIsHigher = false;
-        float leftAverageHeight = 0f;
-        for (int i = 0; i < proceduralFeet.Count; i += proceduralFeet.Count - 1)
-        {
-            leftAverageHeight += proceduralFeet[i].LeftFoot.FinalFootPosition.y;
-        }
-        leftAverageHeight /= 2;
-        float rightAverageHeight = 0f;
-        for (int i = 0; i < proceduralFeet.Count; i += proceduralFeet.Count - 1)
-        {
-            rightAverageHeight += proceduralFeet[i].RightFoot.FinalFootPosition.y;
-        }
-        rightAverageHeight /= 2;
-
-        if (leftAverageHeight > rightAverageHeight) leftIsHigher = true;
-        //else if (leftAverageHeight == rightAverageHeight) return;
-
-        float delta = 0;
-
-        delta = leftIsHigher ? leftAverageHeight - rightAverageHeight : rightAverageHeight - leftAverageHeight;
-        float rotationDegrees = delta * rotationMultiplier * Time.deltaTime;
-
-        //If right leg is higher, invert the rotation to a negative value
-        rotationDegrees = leftIsHigher ? rotationDegrees : rotationDegrees * -1;
-        //Rotate degrees around Z axis
-        controllerTransform.Rotate(Vector3.forward * rotationDegrees);
-        */
-        //attempt 2
+        //Rotation of entire controller
         Vector3 localForward = proceduralFeet[0].LeftFoot.FinalFootPosition - proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition;
         Vector3 localRight = proceduralFeet[0].RightFoot.FinalFootPosition - proceduralFeet[0].LeftFoot.FinalFootPosition;
         Vector3 localUp = Vector3.Cross(localForward, localRight);

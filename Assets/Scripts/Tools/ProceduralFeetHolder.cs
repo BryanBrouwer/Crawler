@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class ProceduralFeetHolder : MonoBehaviour
 {
     [SerializeField]
     private GameObject feetPrefab;
+    [SerializeField]
+    private GameObject rayPointsParent;
     [SerializeField]
     private float localFrontZ = 1.73f;
     [SerializeField]
@@ -18,8 +19,10 @@ public class ProceduralFeetHolder : MonoBehaviour
 
     public List<ProceduralFeetAnimation> ProceduralFeet;
 
+    //Only use/run in editor time.
     public void CreateFeet()
     {
+#if UNITY_EDITOR
         //Destroy all current feet
         int childs = transform.childCount;
         for (int i = childs - 1; i >= 0; i--)
@@ -28,7 +31,7 @@ public class ProceduralFeetHolder : MonoBehaviour
         }
         ProceduralFeet.Clear();
 
-        //Create and place new feet
+        //Create and place new feet // seperated else section for if only 1 foot per side, to save performance on some calculations and if statements. 
         if (AmountOfFeetPerSide > 1)
         {
             float intervalAmount = AmountOfFeetPerSide - 1;
@@ -39,8 +42,20 @@ public class ProceduralFeetHolder : MonoBehaviour
                 float localZ = localFrontZ - (interval * i);
                 GameObject newFeet = Instantiate(feetPrefab, transform);
                 newFeet.transform.localPosition = new Vector3(newFeet.transform.localPosition.x, newFeet.transform.localPosition.y, localZ);
-                ProceduralFeet.Add(newFeet.GetComponent<ProceduralFeetAnimation>());
+                ProceduralFeetAnimation proceduralFeetAnimation = newFeet.GetComponent<ProceduralFeetAnimation>();
+                ProceduralFeet.Add(proceduralFeetAnimation);
                 newFeet.GetComponent<UpdateLineRender>().UpdateRender();
+
+                //link ray spawnpoint to correct foot
+                GameObject raySpawnPoint = new GameObject("rayPoint");
+                raySpawnPoint.transform.parent = rayPointsParent.transform;
+                raySpawnPoint.transform.position = proceduralFeetAnimation.LeftFoot.transform.position;
+                proceduralFeetAnimation.LeftFoot.RaySpawnPoint = raySpawnPoint.transform;
+
+                raySpawnPoint = new GameObject("rayPoint");
+                raySpawnPoint.transform.parent = rayPointsParent.transform;
+                raySpawnPoint.transform.position = proceduralFeetAnimation.RightFoot.transform.position;
+                proceduralFeetAnimation.RightFoot.RaySpawnPoint = raySpawnPoint.transform;
             }
         }
         else
@@ -48,10 +63,22 @@ public class ProceduralFeetHolder : MonoBehaviour
             float localZ = localFrontZ - ((localFrontZ - localBackZ) / 2);
             GameObject newFeet = Instantiate(feetPrefab, transform);
             newFeet.transform.localPosition = new Vector3(newFeet.transform.localPosition.x, newFeet.transform.localPosition.y, localZ);
-            ProceduralFeet.Add(newFeet.GetComponent<ProceduralFeetAnimation>());
+            ProceduralFeetAnimation proceduralFeetAnimation = newFeet.GetComponent<ProceduralFeetAnimation>();
+            ProceduralFeet.Add(proceduralFeetAnimation);
             newFeet.GetComponent<UpdateLineRender>().UpdateRender();
-        }
 
+            //link ray spawnpoint to correct foot
+            GameObject raySpawnPoint = new GameObject("rayPoint");
+            raySpawnPoint.transform.parent = rayPointsParent.transform;
+            raySpawnPoint.transform.position = proceduralFeetAnimation.LeftFoot.transform.position;
+            proceduralFeetAnimation.LeftFoot.RaySpawnPoint = raySpawnPoint.transform;
+
+            raySpawnPoint = new GameObject("rayPoint");
+            raySpawnPoint.transform.parent = rayPointsParent.transform;
+            raySpawnPoint.transform.position = proceduralFeetAnimation.RightFoot.transform.position;
+            proceduralFeetAnimation.RightFoot.RaySpawnPoint = raySpawnPoint.transform;
+        }
+#endif
 
     }
 
