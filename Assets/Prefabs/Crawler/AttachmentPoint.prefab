@@ -153,9 +153,10 @@ MonoBehaviour:
   layerMaskToHit:
     serializedVersion: 2
     m_Bits: 1024
-  debug: 0
-  nextFootPosition: {x: 0, y: 0, z: 0}
-  isMoving: 0
+  RaySpawnPoint: {fileID: 0}
+  NextFootPosition: {x: 0, y: 0, z: 0}
+  FinalFootPosition: {x: 0, y: 0, z: 0}
+  IsMoving: 0
 --- !u!1 &7811465844169564924
 GameObject:
   m_ObjectHideFlags: 0
