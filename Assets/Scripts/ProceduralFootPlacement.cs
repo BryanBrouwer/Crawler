@@ -66,10 +66,9 @@ public class ProceduralFootPlacement : MonoBehaviour
                 {
                     IsMoving = true;
                     FinalFootPosition = hit.point;
-                    Quaternion qadUp = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                    Quaternion qadForward = Quaternion.FromToRotation(foot.transform.forward, (currentFootPosition - FinalFootPosition).normalized);
-                    finalFootRotation = qadUp * qadForward;
-
+                    //For now only adjusting to the normal of the ray hit, attempted to rotate towards moving direction 
+                    //as well but I don't have enough time to bugfix that
+                    finalFootRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
                 }
             }
             else
