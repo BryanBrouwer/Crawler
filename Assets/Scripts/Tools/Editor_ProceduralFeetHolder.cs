@@ -36,6 +36,7 @@ public class Editor_ProceduralFeetHolder : Editor
             // Save contents back to Prefab Asset and unload contents.
             PrefabUtility.SaveAsPrefabAsset(contentsRoot, path);
             PrefabUtility.UnloadPrefabContents(contentsRoot);
+            Editor_UpdateLineRender.UpdateAllLineRenders();
         }
     }
 }

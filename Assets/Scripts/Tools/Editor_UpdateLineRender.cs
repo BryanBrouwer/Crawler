@@ -7,7 +7,7 @@ using UnityEditor;
 public class Editor_UpdateLineRender : Editor
 {
     [MenuItem("MyTools/Line Renderers/Update All Line Renderers")]
-    static void UpdateAllLineRenders()
+    public static void UpdateAllLineRenders()
     {
         var lineRenders = FindObjectsOfType<UpdateLineRender>();
         foreach (var item in lineRenders)
