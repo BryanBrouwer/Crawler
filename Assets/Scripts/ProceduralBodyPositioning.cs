@@ -19,19 +19,22 @@ public class ProceduralBodyPositioning : MonoBehaviour
     //system variables
     private List<ProceduralFeetAnimation> proceduralFeet;
     private Transform controllerTransform;
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
         proceduralFeet = transform.parent.GetComponentInChildren<ProceduralFeetHolder>().ProceduralFeet;
         controllerTransform = transform.root;
+        playerMovement = transform.root.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ////movement of body
-        transform.position = Vector3.Lerp(transform.position, ((proceduralFeet[0].RightFoot.FinalFootPosition
-            + proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition) * 0.5f) + transform.up * heightOffset, lerpMultiplier * Time.deltaTime);
+        controllerTransform.position = Vector3.Lerp(controllerTransform.position, (((proceduralFeet[0].RightFoot.FinalFootPosition
+            + proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition) * 0.5f) + transform.up * heightOffset) + playerMovement.NextPosition,
+            lerpMultiplier * Time.deltaTime);
 
         //Rotation of entire controller
         Vector3 localForward = proceduralFeet[0].LeftFoot.FinalFootPosition - proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition;

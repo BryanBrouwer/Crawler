@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 30;
 
+    [HideInInspector]
+    public Vector3 NextPosition;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,23 +23,27 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    transform.position += transform.forward * movementSpeed * runMultiplier * Time.deltaTime;
+                    NextPosition = transform.forward * movementSpeed * runMultiplier;
                 }
                 else
                 {
-                    transform.position += transform.forward * movementSpeed * Time.deltaTime;
+                    NextPosition = transform.forward * movementSpeed;
                 }
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    transform.position += -transform.forward * movementSpeed * runMultiplier * Time.deltaTime;
+                    NextPosition = -transform.forward * movementSpeed * runMultiplier;
                 }
                 else
                 {
-                    transform.position += -transform.forward * movementSpeed * Time.deltaTime;
+                    NextPosition = -transform.forward * movementSpeed;
                 }
+            }
+            else
+            {
+                NextPosition = Vector3.zero;
             }
         }
 
