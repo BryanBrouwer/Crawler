@@ -30,6 +30,11 @@ public class ProceduralFeetHolder : MonoBehaviour
             GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
         }
         ProceduralFeet.Clear();
+        int childsRayPoints = rayPointsParent.transform.childCount;
+        for (int i = childsRayPoints - 1; i >= 0; i--)
+        {
+            GameObject.DestroyImmediate(rayPointsParent.transform.GetChild(i).gameObject);
+        }
 
         //Create and place new feet // seperated else section for if only 1 foot per side, to save performance on some calculations and if statements. 
         if (AmountOfFeetPerSide > 1)
