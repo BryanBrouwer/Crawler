@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foot: {fileID: 7811465844169564924}
   rayDistance: 10
+  angleBetweenRays: 10
   distanceBeforeMove: 1
   movementAnimationSpeed: 2
   layerMaskToHit:

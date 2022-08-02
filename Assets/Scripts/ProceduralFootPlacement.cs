@@ -10,8 +10,11 @@ public class ProceduralFootPlacement : MonoBehaviour
     private ProceduralFeetAnimation proceduralFeetAnimation;
     //settings
     [SerializeField]
-    [Range(0.1f, 20.0f)]
-    private float rayDistance = 1.0f;
+    [Range(0.1f, 40.0f)]
+    private float rayDistance = 10.0f;
+    [SerializeField]
+    [Range(0.1f, 30.0f)]
+    private float angleBetweenRays = 10.0f;
     [SerializeField]
     [Range(0.1f, 10.0f)]
     private float distanceBeforeMove = 5.0f;
@@ -55,13 +58,40 @@ public class ProceduralFootPlacement : MonoBehaviour
         if (!IsMoving && !proceduralFeetAnimation.IsOtherFootMoving(this))
         {
             RaycastHit hit;
-            // Does the ray intersect any objects on layerMaskToHit
-            if (Physics.Raycast(RaySpawnPoint.position, RaySpawnPoint.TransformDirection(Vector3.down), out hit, rayDistance, layerMaskToHit))
+            bool didRayHit = false;
+
+            float halfAngle = angleBetweenRays / 2;
+            Vector3 directionOfFirstRay = Quaternion.AngleAxis(-halfAngle, RaySpawnPoint.transform.right) * -RaySpawnPoint.transform.up;
+            Vector3 directionOfSecondRay = Quaternion.AngleAxis(halfAngle, RaySpawnPoint.transform.right) * -RaySpawnPoint.transform.up;
+
+            // Does any ray of the double rays intersect any objects on layerMaskToHit
+            if (Physics.Raycast(RaySpawnPoint.position, directionOfFirstRay, out hit, rayDistance, layerMaskToHit))
+            {
+                didRayHit = true;
+#if UNITY_EDITOR
+                Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * hit.distance, Color.yellow);
+                Debug.Log("First Ray Hit");
+#endif
+            }//first ray
+            else if (Physics.Raycast(RaySpawnPoint.position, directionOfSecondRay, out hit, rayDistance, layerMaskToHit))
+            {
+                didRayHit = true;
+#if UNITY_EDITOR
+                Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * hit.distance, Color.yellow);
+                Debug.Log("Second Ray Hit");
+#endif
+            }//second ray
+            else
             {
 #if UNITY_EDITOR
-                Debug.DrawRay(RaySpawnPoint.position, RaySpawnPoint.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
+                Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * rayDistance, Color.white);
+                Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * rayDistance, Color.white);
+                Debug.Log("Did not Hit");
 #endif
+            }//didnt hit
+
+            if (didRayHit)
+            {
                 if (Vector3.Distance(currentFootPosition, hit.point) >= distanceBeforeMove)
                 {
                     IsMoving = true;
@@ -70,13 +100,6 @@ public class ProceduralFootPlacement : MonoBehaviour
                     //as well but I don't have enough time to bugfix that
                     finalFootRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
                 }
-            }
-            else
-            {
-#if UNITY_EDITOR
-                Debug.DrawRay(RaySpawnPoint.position, RaySpawnPoint.TransformDirection(Vector3.down) * rayDistance, Color.white);
-                Debug.Log("Did not Hit");
-#endif
             }
         }
         #endregion

@@ -30,8 +30,8 @@ public class ProceduralBodyPositioning : MonoBehaviour
     void Update()
     {
         ////movement of body
-        transform.position = Vector3.Lerp(transform.position, (proceduralFeet[0].RightFoot.FinalFootPosition
-            + proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition) * 0.5f, lerpMultiplier * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, ((proceduralFeet[0].RightFoot.FinalFootPosition
+            + proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition) * 0.5f) + transform.up * heightOffset, lerpMultiplier * Time.deltaTime);
 
         //Rotation of entire controller
         Vector3 localForward = proceduralFeet[0].LeftFoot.FinalFootPosition - proceduralFeet[proceduralFeet.Count - 1].LeftFoot.FinalFootPosition;
