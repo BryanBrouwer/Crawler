@@ -29,13 +29,13 @@ public class ProceduralBodyPositioning : MonoBehaviour
         {
             for (int i = 0; i < proceduralFeet.Length; i++)
             {
-                if (!proceduralFeet[i].isMoving)
+                if (!proceduralFeet[i].IsMoving)
                 {
-                    averageHeight += proceduralFeet[i].nextFootPosition.y;
+                    averageHeight += proceduralFeet[i].NextFootPosition.y;
                 }
                 else
                 {
-                    averageHeight += proceduralFeet[i].finalFootPosition.y;
+                    averageHeight += proceduralFeet[i].FinalFootPosition.y;
                 }
             }
         }
@@ -43,7 +43,7 @@ public class ProceduralBodyPositioning : MonoBehaviour
         {
             for (int i = 0; i < proceduralFeet.Length; i++)
             {
-                averageHeight += proceduralFeet[i].nextFootPosition.y;
+                averageHeight += proceduralFeet[i].NextFootPosition.y;
             }
         }
 

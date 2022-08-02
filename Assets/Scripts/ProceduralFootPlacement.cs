@@ -30,17 +30,17 @@ public class ProceduralFootPlacement : MonoBehaviour
     private float fraction = 0;
 
     [HideInInspector]
-    public Vector3 nextFootPosition;
+    public Vector3 NextFootPosition;
     [HideInInspector]
-    public Vector3 finalFootPosition;
+    public Vector3 FinalFootPosition;
     [HideInInspector]
-    public bool isMoving = false;
+    public bool IsMoving = false;
 
     void Awake()
     {
         proceduralFeetAnimation = GetComponentInParent<ProceduralFeetAnimation>();
         currentFootPosition = foot.transform.position;
-        nextFootPosition = foot.transform.position;
+        NextFootPosition = foot.transform.position;
         oldFootRotation = foot.transform.rotation;
     }
 
@@ -49,7 +49,7 @@ public class ProceduralFootPlacement : MonoBehaviour
     {
         //Raycast code
         #region Raycast Region
-        if (!isMoving && !proceduralFeetAnimation.IsOtherFootMoving(this))
+        if (!IsMoving && !proceduralFeetAnimation.IsOtherFootMoving(this))
         {
             RaycastHit hit;
             // Does the ray intersect any objects on layerMaskToHit
@@ -63,8 +63,8 @@ public class ProceduralFootPlacement : MonoBehaviour
 
                 if (Vector3.Distance(currentFootPosition, hit.point) >= distanceBeforeMove)
                 {
-                    isMoving = true;
-                    finalFootPosition = hit.point;
+                    IsMoving = true;
+                    FinalFootPosition = hit.point;
                     //oldFootRotation = foot.transform.rotation;
                     finalFootRotation = Quaternion.FromToRotation(transform.up, hit.normal) * oldFootRotation;
                 }
@@ -82,17 +82,17 @@ public class ProceduralFootPlacement : MonoBehaviour
 
         //Handle movement
         #region Movement Region
-        if (isMoving)
+        if (IsMoving)
         {
             fraction += movementAnimationSpeed * Time.deltaTime;
             if (fraction >= 1.0f)
             {
                 fraction = 0.0f;
-                isMoving = false;
+                IsMoving = false;
 
                 //movement
-                foot.transform.position = finalFootPosition;
-                nextFootPosition = finalFootPosition;
+                foot.transform.position = FinalFootPosition;
+                NextFootPosition = FinalFootPosition;
                 //Update value before next frame to avoid moving foot when moving body
                 currentFootPosition = foot.transform.position;
 
@@ -101,9 +101,9 @@ public class ProceduralFootPlacement : MonoBehaviour
                 return;
             }
             //movement
-            nextFootPosition = Vector3.Lerp(currentFootPosition, finalFootPosition, fraction);
-            nextFootPosition += transform.up * Mathf.Sin(Mathf.PI * 2 * (fraction * 180) / 360);
-            foot.transform.position = nextFootPosition;
+            NextFootPosition = Vector3.Lerp(currentFootPosition, FinalFootPosition, fraction);
+            NextFootPosition += transform.up * Mathf.Sin(Mathf.PI * 2 * (fraction * 180) / 360);
+            foot.transform.position = NextFootPosition;
             //rotation
             foot.transform.rotation = finalFootRotation;//Quaternion.Lerp(oldFootRotation, finalFootRotation, fraction);
         }
