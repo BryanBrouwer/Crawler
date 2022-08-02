@@ -66,7 +66,10 @@ public class ProceduralFootPlacement : MonoBehaviour
                 {
                     IsMoving = true;
                     FinalFootPosition = hit.point;
-                    finalFootRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    Quaternion qadUp = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    Quaternion qadForward = Quaternion.FromToRotation(Vector3.forward, (currentFootPosition - FinalFootPosition).normalized);
+                    finalFootRotation = qadUp * qadForward;
+
                 }
             }
             else
