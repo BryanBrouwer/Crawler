@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(CalculateFeetPositions))]
 public class Editor_CalculateFeetPositions : Editor
@@ -20,3 +20,4 @@ public class Editor_CalculateFeetPositions : Editor
     }
 
 }
+#endif

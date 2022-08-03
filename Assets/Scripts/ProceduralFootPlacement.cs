@@ -19,6 +19,9 @@ public class ProceduralFootPlacement : MonoBehaviour
     [Range(0.1f, 10.0f)]
     private float distanceBeforeMove = 5.0f;
     [SerializeField]
+    [Range(0.0f, 2.0f)]
+    private float maxRandomDistanceMoveOffset = 0.4f;
+    [SerializeField]
     [Range(0.1f, 10.0f)]
     private float movementAnimationSpeed = 1.0f;
     [SerializeField]
@@ -48,6 +51,8 @@ public class ProceduralFootPlacement : MonoBehaviour
         NextFootPosition = foot.transform.position;
         FinalFootPosition = foot.transform.position;
         oldFootRotation = foot.transform.rotation;
+        var halfRandomDistanceMoveOffset = maxRandomDistanceMoveOffset / 2;
+        distanceBeforeMove = Mathf.Max(0.1f, distanceBeforeMove + Random.Range(-halfRandomDistanceMoveOffset, halfRandomDistanceMoveOffset));
     }
 
     // Update is called once per frame
@@ -70,7 +75,7 @@ public class ProceduralFootPlacement : MonoBehaviour
                 didRayHit = true;
 #if UNITY_EDITOR
                 Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * hit.distance, Color.yellow);
-                Debug.Log("First Ray Hit");
+                //Debug.Log("First Ray Hit");
 #endif
             }//first ray
             else if (Physics.Raycast(RaySpawnPoint.position, directionOfSecondRay, out hit, rayDistance, layerMaskToHit))
@@ -78,7 +83,7 @@ public class ProceduralFootPlacement : MonoBehaviour
                 didRayHit = true;
 #if UNITY_EDITOR
                 Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * hit.distance, Color.yellow);
-                Debug.Log("Second Ray Hit");
+                //Debug.Log("Second Ray Hit");
 #endif
             }//second ray
             else
@@ -86,7 +91,7 @@ public class ProceduralFootPlacement : MonoBehaviour
 #if UNITY_EDITOR
                 Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * rayDistance, Color.white);
                 Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * rayDistance, Color.white);
-                Debug.Log("Did not Hit");
+                //Debug.Log("Did not Hit");
 #endif
             }//didnt hit
 
