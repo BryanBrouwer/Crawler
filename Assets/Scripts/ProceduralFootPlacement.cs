@@ -19,9 +19,6 @@ public class ProceduralFootPlacement : MonoBehaviour
     [Range(0.1f, 10.0f)]
     private float distanceBeforeMove = 5.0f;
     [SerializeField]
-    [Range(0.0f, 2.0f)]
-    private float maxRandomDistanceMoveOffset = 0.4f;
-    [SerializeField]
     [Range(0.1f, 10.0f)]
     private float movementAnimationSpeed = 1.0f;
     [SerializeField]
@@ -51,8 +48,6 @@ public class ProceduralFootPlacement : MonoBehaviour
         NextFootPosition = foot.transform.position;
         FinalFootPosition = foot.transform.position;
         oldFootRotation = foot.transform.rotation;
-        var halfRandomDistanceMoveOffset = maxRandomDistanceMoveOffset / 2;
-        distanceBeforeMove = Mathf.Max(0.1f, distanceBeforeMove + Random.Range(-halfRandomDistanceMoveOffset, halfRandomDistanceMoveOffset));
     }
 
     // Update is called once per frame
