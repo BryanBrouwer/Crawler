@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
 public class ProceduralBodyPositioning : MonoBehaviour
 {
     [SerializeField]
     [Range(0.0f, 3.0f)]
-    private float heightOffset = 2.0f;
+    private const float heightOffset = 2.0f;
     [SerializeField]
     [Range(0.0f, 3.0f)]
-    private float rotationMultiplier = 2.0f;
+    private const float rotationMultiplier = 2.0f;
     [SerializeField]
     private bool excludeMovingFeet = true;
     [SerializeField]
     [Range(1.0f, 100.0f)]
-    private float lerpMultiplier = 10f;
+    private const float lerpMultiplier = 10f;
 
     //system variables
     private List<ProceduralFeetAnimation> proceduralFeet;

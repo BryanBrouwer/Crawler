@@ -4,29 +4,31 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(UpdateLineRender))]
-public class Editor_UpdateLineRender : Editor
+namespace Tools
 {
-    [MenuItem("MyTools/Line Renderers/Update All Line Renderers")]
-    public static void UpdateAllLineRenders()
+    [CustomEditor(typeof(UpdateLineRender))]
+    public class Editor_UpdateLineRender : Editor
     {
-        var lineRenders = FindObjectsOfType<UpdateLineRender>();
-        foreach (var item in lineRenders)
+        [MenuItem("MyTools/Line Renderers/Update All Line Renderers")]
+        public static void UpdateAllLineRenders()
         {
-            item.UpdateRender();
+            var lineRenders = FindObjectsOfType<UpdateLineRender>();
+            foreach (var item in lineRenders)
+            {
+                item.UpdateRender();
+            }
+        }
+
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            UpdateLineRender myScript = (UpdateLineRender)target;
+            if (GUILayout.Button("Update Line Renderers"))
+            {
+                myScript.UpdateRender();
+            }
         }
     }
-
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        UpdateLineRender myScript = (UpdateLineRender)target;
-        if (GUILayout.Button("Update Line Renderers"))
-        {
-            myScript.UpdateRender();
-        }
-    }
-
 }
 #endif

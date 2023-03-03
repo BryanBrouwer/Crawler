@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private float movementSpeed = 2;
+    private const float movementSpeed = 2;
     [SerializeField]
-    private float runMultiplier = 2;
+    private const float runMultiplier = 2;
     [SerializeField]
-    private float rotationSpeed = 30;
+    private const float rotationSpeed = 30;
 
     [HideInInspector]
     public Vector3 NextPosition;

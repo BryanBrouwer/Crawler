@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CalculateFeetPositions : MonoBehaviour
+namespace Tools
 {
-    public void CalculateCurrentPositions()
+    public class CalculateFeetPositions : MonoBehaviour
     {
-        var footPlacements = GetComponentsInChildren<ProceduralFootPlacement>();
-        foreach (var item in footPlacements)
+        public void CalculateCurrentPositions()
         {
-            item.Awake();
-            item.SetMinimumDistance(0.0f);
-            item.Update();
-            item.MoveToFinalPosition();
+            //set variables from on awake for feet animation components
+            var feetAnimations = GetComponentsInChildren<ProceduralFeetAnimation>();
+            foreach (var item in feetAnimations)
+            {
+                item.Awake();
+            }
+
+            //call awake for variable setting, and then call positioning functions
+            var footPlacements = GetComponentsInChildren<ProceduralFootPlacement>();
+            foreach (var item in footPlacements)
+            {
+                item.Awake();
+                item.SetMinimumDistance(0.0f);
+                item.RayCastFootPlacement();
+                item.MoveToFinalPosition();
+            }
         }
     }
 }

@@ -13,8 +13,6 @@ public class ProceduralFeetAnimation : MonoBehaviour
     public void Awake()
     {
         connectedFeet = GetComponentsInChildren<ProceduralFootPlacement>();
-        //LeftFoot.IsLeftFoot = true;
-        //RightFoot.IsLeftFoot = false;
     }
 
     public bool IsOtherFootMoving(ProceduralFootPlacement requestingFoot)

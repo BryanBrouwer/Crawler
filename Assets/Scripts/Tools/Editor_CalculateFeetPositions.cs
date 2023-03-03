@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEngine;
 
-[CustomEditor(typeof(CalculateFeetPositions))]
-public class Editor_CalculateFeetPositions : Editor
+namespace Tools
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(CalculateFeetPositions))]
+    public class Editor_CalculateFeetPositions : Editor
     {
-        DrawDefaultInspector();
-
-        CalculateFeetPositions myScript = (CalculateFeetPositions)target;
-        if (GUILayout.Button("Calculate current feet positions"))
+        public override void OnInspectorGUI()
         {
-            myScript.CalculateCurrentPositions();
-            Editor_UpdateLineRender.UpdateAllLineRenders();
-        }
-    }
+            DrawDefaultInspector();
 
+            CalculateFeetPositions myScript = (CalculateFeetPositions)target;
+            if (GUILayout.Button("Calculate current feet positions"))
+            {
+                myScript.CalculateCurrentPositions();
+                Editor_UpdateLineRender.UpdateAllLineRenders();
+            }
+        }
+
+    }
 }
 #endif

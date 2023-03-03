@@ -11,21 +11,20 @@ public class ProceduralFootPlacement : MonoBehaviour
     //settings
     [SerializeField]
     [Range(0.1f, 40.0f)]
-    private float rayDistance = 10.0f;
+    private const float rayDistance = 10.0f;
     [SerializeField]
     [Range(0.1f, 30.0f)]
-    private float angleBetweenRays = 10.0f;
+    private const float angleBetweenRays = 10.0f;
     [SerializeField]
     [Range(0.1f, 10.0f)]
     private float distanceBeforeMove = 5.0f;
-    [SerializeField]
-    [Range(0.1f, 10.0f)]
-    private float movementAnimationSpeed = 1.0f;
+    [SerializeField] 
+    [Range(0.1f, 10.0f)] 
+    private const float movementAnimationSpeed = 1.0f;
     [SerializeField]
     private LayerMask layerMaskToHit;
 
     //system variables
-    private Quaternion oldFootRotation;
     private Quaternion finalFootRotation;
     private Vector3 currentFootPosition;
     private float fraction = 0;
@@ -47,7 +46,6 @@ public class ProceduralFootPlacement : MonoBehaviour
         currentFootPosition = foot.transform.position;
         NextFootPosition = foot.transform.position;
         FinalFootPosition = foot.transform.position;
-        oldFootRotation = foot.transform.rotation;
     }
 
     // Update is called once per frame
@@ -57,50 +55,7 @@ public class ProceduralFootPlacement : MonoBehaviour
         #region Raycast Region
         if (!IsMoving && !proceduralFeetAnimation.IsOtherFootMoving(this))
         {
-            RaycastHit hit;
-            bool didRayHit = false;
-
-            float halfAngle = angleBetweenRays / 2;
-            Vector3 directionOfFirstRay = Quaternion.AngleAxis(-halfAngle, RaySpawnPoint.transform.right) * -RaySpawnPoint.transform.up;
-            Vector3 directionOfSecondRay = Quaternion.AngleAxis(halfAngle, RaySpawnPoint.transform.right) * -RaySpawnPoint.transform.up;
-
-            // Does any ray of the double rays intersect any objects on layerMaskToHit
-            if (Physics.Raycast(RaySpawnPoint.position, directionOfFirstRay, out hit, rayDistance, layerMaskToHit))
-            {
-                didRayHit = true;
-#if UNITY_EDITOR
-                Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * hit.distance, Color.yellow);
-                //Debug.Log("First Ray Hit");
-#endif
-            }//first ray
-            else if (Physics.Raycast(RaySpawnPoint.position, directionOfSecondRay, out hit, rayDistance, layerMaskToHit))
-            {
-                didRayHit = true;
-#if UNITY_EDITOR
-                Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * hit.distance, Color.yellow);
-                //Debug.Log("Second Ray Hit");
-#endif
-            }//second ray
-            else
-            {
-#if UNITY_EDITOR
-                Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * rayDistance, Color.white);
-                Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * rayDistance, Color.white);
-                //Debug.Log("Did not Hit");
-#endif
-            }//didnt hit
-
-            if (didRayHit)
-            {
-                if (Vector3.Distance(currentFootPosition, hit.point) >= distanceBeforeMove)
-                {
-                    IsMoving = true;
-                    FinalFootPosition = hit.point;
-                    //For now only adjusting to the normal of the ray hit, attempted to rotate towards moving direction 
-                    //as well but I don't have enough time to bugfix that
-                    finalFootRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                }
-            }
+            RayCastFootPlacement();
         }
         #endregion
 
@@ -147,5 +102,50 @@ public class ProceduralFootPlacement : MonoBehaviour
     {
         foot.transform.position = FinalFootPosition;
         foot.transform.rotation = finalFootRotation;
+    }
+
+    public void RayCastFootPlacement()
+    {
+        bool didRayHit = false;
+
+        const float halfAngle = angleBetweenRays / 2;
+        Vector3 directionOfFirstRay = Quaternion.AngleAxis(-halfAngle, RaySpawnPoint.transform.right) * -RaySpawnPoint.transform.up;
+        Vector3 directionOfSecondRay = Quaternion.AngleAxis(halfAngle, RaySpawnPoint.transform.right) * -RaySpawnPoint.transform.up;
+
+        // Does any ray of the double rays intersect any objects on layerMaskToHit
+        if (Physics.Raycast(RaySpawnPoint.position, directionOfFirstRay, out var hit, rayDistance, layerMaskToHit))
+        {
+            didRayHit = true;
+#if UNITY_EDITOR
+            Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * hit.distance, Color.yellow);
+            //Debug.Log("First Ray Hit");
+#endif
+        }//first ray
+        else if (Physics.Raycast(RaySpawnPoint.position, directionOfSecondRay, out hit, rayDistance, layerMaskToHit))
+        {
+            didRayHit = true;
+#if UNITY_EDITOR
+            Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * hit.distance, Color.yellow);
+            //Debug.Log("Second Ray Hit");
+#endif
+        }//second ray
+        else
+        {
+#if UNITY_EDITOR
+            Debug.DrawRay(RaySpawnPoint.position, directionOfFirstRay * rayDistance, Color.white);
+            Debug.DrawRay(RaySpawnPoint.position, directionOfSecondRay * rayDistance, Color.white);
+            //Debug.Log("Did not Hit");
+#endif
+        }//didnt hit
+
+        if (!didRayHit) return;
+        if (Vector3.Distance(currentFootPosition, hit.point) >= distanceBeforeMove)
+        {
+            IsMoving = true;
+            FinalFootPosition = hit.point;
+            //For now only adjusting to the normal of the ray hit, attempted to rotate towards moving direction 
+            //as well but I don't have enough time to bugfix that
+            finalFootRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        }
     }
 }
